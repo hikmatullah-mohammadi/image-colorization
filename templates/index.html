@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+<!-- head -->
+{% block head %}
+<title>Image Colorization</title>
+{% endblock %}
+<!-- body -->
+{% block body %}
+<div class="index">
+  <h1>Colorize your old, black & white photos easily</h1>
+  <hr>
+  <div class="image-upload">
+    <form action="./colorize" class="image-upload-form" method="POST" enctype="multipart/form-data">
+      <input 
+        type="file" 
+        name="bw_img" 
+        class="img-inp btn" 
+        required
+        accept="image/*"
+        id='img-inp'
+      >
+      <input type="submit" value="Upload photo" class="btn">
+    </form>
+    {% if err %}
+     <div class="error" id='err-not-grayscale'><b>{{ err }}</b></div>
+    {% endif %}
+  </div>
+</div>
+<script src="{{ url_for('static', filename='main.js')}}"></script>
+{% endblock %}
+
+
+<!-- 
+
+  <!DOCTYPE html>
+<html>
+  <head>
+    <title>Colorize Image</title>
+  </head>
+  <body>
+    <h1>Colorize Image</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+      <input type="file" name="image">
+      <input type="submit" value="Colorize">
+    </form>
+    <br>
+    <img id="result" src="" style="display:none;">
+    <script>
+      function colorize() {
+        var form = document.forms[0];
+        var formData = new FormData(form);
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            document.getElementById("result").src = "data:image/png;base64," + btoa(xhr.response);
+            document.getElementById("result").style.display = "block";
+          }
+        };
+        xhr.open("POST", "/predict", true);
+        xhr.send(formData);
+      }
+    </script>
+  </body>
+</html>
+ -->

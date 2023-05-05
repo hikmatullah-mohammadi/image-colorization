@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+<!-- head -->
+{% block head %}
+<title>Image Colorization</title>
+{% endblock %}
+<!-- body -->
+{% block body %}
+<h1>Colorize your old, black & white photos easily</h1>
+<hr>
+<div class="colorize">
+  <div class="img-container">
+    <label><b>Original Image</b></label>
+    <img src="data:image/jpeg;base64,{{ bw_img_str }}" alt="Original Image">
+  </div>
+  <div class="img-container">
+    <label><b>Colorized Image</b></label>
+    <img src="data:image/jpeg;base64,{{ color_img_str }}" alt="Colorized Image">
+  </div>
+</div>
+<div class="helpers">
+  <a class="btn" href="/">Go to home</a>
+  <a href="data:image/jpeg;base64,{{ color_img_str }}" download="colorized_image.jpg" class="btn">Download the colorized image</a>
+</div>
+
+{% endblock %}
