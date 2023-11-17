@@ -9,15 +9,13 @@ import os
 
 import utils
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-
 app.secret_key = app.config['SECRET_KEY']
-app.debug = False
+# app.debug = False
 
 # Load the trained model
-model = tf.keras.models.load_model('./ml-models/img-colorization-model.h5')
+model = tf.keras.models.load_model('./ml-models/img-colorization-model.h5', compile=False)
 
 # Define a route for the home page
 @app.route('/')
@@ -38,7 +36,6 @@ def colorize():
         L = utils.preprocess_input_image(img)
         # colorize the image
         colorized_img = utils.colorize_image(model, L)[0]
-
         ##### Get the image ready to be rendered to the html page
         # change the image array to Image object
         colorized_img = Image.fromarray(np.uint8(colorized_img))
